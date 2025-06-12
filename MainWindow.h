@@ -3,58 +3,35 @@
 #pragma execution_character_set("utf-8")
 
 #include <QMainWindow>
-#include <QLabel>
-#include <QStatusBar>
 #include <QStackedWidget>
-#include <QTimer>
-#include "StudentPanel.h"
-#include "PresidentPanel.h"
-#include "AdminPanel.h"
+#include <QStatusBar>
 #include "UserManager.h"
-#include "ClubManager.h"
-#include "ActivityManager.h"
+#include "DatabaseManager.h"
 
-class MainWindow : public QMainWindow {
+class AdminPanel;
+class PresidentPanel;
+class StudentPanel;
+
+class MainWindow : public QMainWindow
+{
     Q_OBJECT
-public:
-    explicit MainWindow(QWidget* parent = nullptr);
-    ~MainWindow();
-    UserManager* getUserManager() const;
 
-private slots:
-    void onLoginClicked();
-    void onRegisterClicked();
-    void onLogoutClicked();
-    void onDataExportClicked();
-    void updateRoleDisplay();
-    void handleDatabaseStatusChange(bool connected);
+public:
+    MainWindow(UserManager* userMgr, QWidget* parent = nullptr);
+    ~MainWindow();
 
 private:
     void setupUI();
-    void setupMenuBar();
-    void setupStatusBar();
-    void setupConnections();
+    void updateStatusBar();
+    void onDatabaseStatusChanged(bool connected);
 
-    // UI components
-    QLabel* m_userInfoLabel;
-    QLabel* m_dbStatusLabel;
-    QStatusBar* m_statusBar;
-    QStackedWidget* m_roleStackedWidget;
+    QStackedWidget* stackedWidget;
+    AdminPanel* adminPanel;
+    PresidentPanel* presidentPanel;
+    StudentPanel* studentPanel;
+    QStatusBar* statusBar;
 
-    // Panels
-    StudentPanel* m_studentPanel;
-    PresidentPanel* m_presidentPanel;
-    AdminPanel* m_adminPanel;
-
-    // Manager instances
-    UserManager* m_userManager;
-    ClubManager* m_clubManager;
-    ActivityManager* m_activityManager;
-
-    QTimer* m_dbCheckTimer;
-
-    // 当前登录用户id（示例，正式开发需完善登录用户信息管理）
-    int m_currentUserId;
+    UserManager* m_userMgr;
 };
 
 #endif // MAINWINDOW_H

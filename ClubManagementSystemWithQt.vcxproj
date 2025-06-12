@@ -102,6 +102,7 @@
     <ClCompile Include="AdminPanel.cpp" />
     <ClCompile Include="ClubManager.cpp" />
     <ClCompile Include="DatabaseManager.cpp" />
+    <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="LoginDialog.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
@@ -133,6 +134,9 @@
     <QtMoc Include="PresidentPanel.h" />
     <QtMoc Include="AdminPanel.h" />
     <QtMoc Include="StudentPanel.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="FileManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

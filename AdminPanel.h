@@ -8,6 +8,7 @@
 
 class QTableWidget;
 class QPushButton;
+class QStatusBar;
 
 class AdminPanel : public QWidget {
     Q_OBJECT
@@ -23,9 +24,15 @@ private slots:
     void onActivateClicked();
     void onApproveClubClicked();
     void onRejectClubClicked();
-    void onDataChanged();
+    void onDatabaseStatusChanged(bool connected);
 
 private:
+    void setupUI();
+    void createUserTable();
+    void createClubTable();
+    int getSelectedUserId() const;
+    int getSelectedClubId() const;
+
     QTableWidget* userTable;
     QPushButton* resetPwdBtn;
     QPushButton* freezeBtn;
@@ -33,6 +40,7 @@ private:
     QTableWidget* clubTable;
     QPushButton* approveBtn;
     QPushButton* rejectBtn;
+    QStatusBar* statusBar;
 
     UserManager* m_userMgr;
     ClubManager* m_clubMgr;

@@ -7,15 +7,13 @@
 #include <QLineEdit>
 #include <QComboBox>
 #include <QPushButton>
+#include "UserManager.h"
 
-class UserManager;
 class RegisterDialog : public QDialog {
     Q_OBJECT
 public:
-    explicit RegisterDialog(UserManager* user, QWidget* parent = nullptr);
-
+    explicit RegisterDialog(UserManager* userMgr, QWidget* parent = nullptr);
     QString username() const { return m_username; }
-    QString role() const { return m_role; }
 
 private slots:
     void onRegisterClicked();
@@ -30,15 +28,13 @@ private:
     QComboBox* m_roleCombo;
     QLineEdit* m_passwordEdit;
     QLineEdit* m_confirmPasswordEdit;
-    QLineEdit* m_captchaEdit;
     QLabel* m_captchaLabel;
+    QLineEdit* m_captchaEdit;
     QPushButton* m_registerButton;
 
     QString m_username;
-    QString m_role;
     int m_captchaValue = 0;
 };
 
 #endif // REGISTERDIALOG_H
-
 

@@ -7,6 +7,7 @@
 #include <QVector>
 #include <QStringList>
 #include <QVariant>
+#include <QSqlQuery>
 
 struct ActivityInfo {
     int id;
@@ -16,6 +17,9 @@ struct ActivityInfo {
     QString location;
     QString clubName;
     double rating; // 平均分
+    int maxParticipants;
+    double budget;
+    int status;
 };
 
 class ActivityManager : public QObject {
@@ -23,28 +27,39 @@ class ActivityManager : public QObject {
 public:
     explicit ActivityManager(QObject* parent = nullptr);
 
-    // 查询活动，带多条件
+    // 活动管理接口
     QVector<ActivityInfo> queryActivities(const QString& keyword, const QString& type,
         const QDate& start, const QDate& end);
 
-    // 添加活动反馈
+    QVector<ActivityInfo> queryActivitiesByPinyin(const QString& pinyinAbbr,
+        const QString& type, const QDate& start, const QDate& end);
+
+    bool addActivity(int clubId, const QString& title, const QDateTime& start,
+        const QDateTime& end, const QString& location,
+        int maxParticipants, double budget);
+
+    // 活动反馈
     bool addFeedback(int activityId, int userId, int rating, const QString& comment);
 
-    // 查询活跃度排名
+    // 活跃度排名
     struct ClubActiveInfo {
         QString name;
         int activityCount;
-        double partRate;
-        double budgetRate;
+        double participationRate;
+        double budgetEfficiency;
+        double activityScore;
     };
-    QVector<ClubActiveInfo> queryActiveClubs();
+    QVector<ClubActiveInfo> calculateClubActiveRanking();
 
 signals:
     void activityDataChanged();
     void feedbackSubmitted(bool success, const QString& message);
+    void conflictDetected(const QString& message);
+
+private:
+    ActivityInfo parseActivityFromQuery(const QSqlQuery& query) const;
 };
 
 #endif // ACTIVITYMANAGER_H
-
 
 
