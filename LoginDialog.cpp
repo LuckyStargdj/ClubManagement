@@ -33,7 +33,7 @@ void LoginDialog::setupUI() {
     QVBoxLayout* mainLayout = new QVBoxLayout(this);
 
     // 标题
-    QLabel* titleLabel = new QLabel("社团管理系统", this);
+    QLabel* titleLabel = new QLabel("大学生社团管理系统", this);
     titleLabel->setAlignment(Qt::AlignCenter);
     QFont titleFont = titleLabel->font();
     titleFont.setPointSize(18);
@@ -43,6 +43,7 @@ void LoginDialog::setupUI() {
 
     QGroupBox* formGroup = new QGroupBox("用户登录", this);
     QFormLayout* formLayout = new QFormLayout(formGroup);
+    formLayout->setSpacing(20);
 
     // 用户名
     m_usernameEdit = new QLineEdit(this);

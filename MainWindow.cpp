@@ -11,7 +11,7 @@
 MainWindow::MainWindow(UserManager* userMgr, QWidget* parent)
     : QMainWindow(parent), m_userMgr(userMgr)
 {
-    setWindowTitle("社团管理系统");
+    setWindowTitle("大学生社团管理系统");
     resize(800, 600);
 
     setupUI();

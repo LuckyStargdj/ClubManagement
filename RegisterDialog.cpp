@@ -11,7 +11,7 @@
 
 RegisterDialog::RegisterDialog(UserManager* userMgr, QWidget* parent)
     : QDialog(parent), m_userManager(userMgr), m_captchaValue(0) {
-    setWindowTitle("社团管理系统 - 注册");
+    setWindowTitle("大学生社团管理系统 - 注册");
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     setFixedSize(500, 400);
     setupUI();
